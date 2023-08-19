@@ -18,12 +18,11 @@ public class WebInterfaceTesting {
     WebDriver driver;
 
     @BeforeAll
-    public void setupAll() {
+    static void setupAll() {
         WebDriverManager.chromedriver().setup();
     }
-
     @BeforeEach
-    public void setupUp() {
+    void setupUp() {
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("-disable-dev-shm-usage");
@@ -41,7 +40,7 @@ public class WebInterfaceTesting {
     @Test
     void shouldTestSomething() throws InterruptedException {
         //Предусловие
-        driver.get("http://localhost:9999");
+        driver.get("http://0.0.0.0:9999");
         //Выполняемые действия
         List<WebElement> elements = driver.findElements(By.className("input__control"));
         elements.get(0).sendKeys("Владимир");
