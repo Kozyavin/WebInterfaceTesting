@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WebInterfaceTesting {
 
-    WebDriver driver;
+     WebDriver driver;
 
     @BeforeAll
     static void setupAll() {
@@ -38,18 +38,18 @@ public class WebInterfaceTesting {
     }
 
     @Test
-    void shouldTestSomething() throws InterruptedException {
+    public void shouldTestSomething() {
         //Предусловие
-        driver.get("http://0.0.0.0:9999");
+        driver.get("http://localhost:9999");
+
         //Выполняемые действия
         List<WebElement> elements = driver.findElements(By.className("input__control"));
         elements.get(0).sendKeys("Владимир");
         elements.get(1).sendKeys("+79030000001");
-
         driver.findElement(By.className("checkbox__box")).click();
         driver.findElement(By.className("button")).click();
-
         String text = driver.findElement(By.className("paragraph")).getText();
+
         //Проверки
         assertEquals("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.", text.trim());
 
