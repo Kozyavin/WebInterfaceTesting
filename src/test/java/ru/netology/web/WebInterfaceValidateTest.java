@@ -41,53 +41,40 @@ public class WebInterfaceValidateTest {
     }
 
     @Test
-    public void Test_1() { ///ввод допустимого имени
+    public void enterNotValidName() { ///ввод НЕ допустимого имени
 
         driver.get("http://localhost:9999");
 
-        driver.findElement(By.className("input__control")).sendKeys("Владимир");
+        driver.findElement(By.cssSelector("[data-test-id = 'name'] input")).sendKeys("Vladimir");
+        driver.findElement(By.cssSelector("[data-test-id = 'phone'] input")).sendKeys("+79011114038");
         driver.findElement(By.className("checkbox__box")).click();
         driver.findElement(By.className("button")).click();
-        String text = driver.findElement(By.className("input__sub")).getText();
-
-        assertEquals("Укажите точно как в паспорте", text.trim());
-
-    }
-
-    @Test
-    public void Test_2() { ///ввод НЕ допустимого имени
-
-        driver.get("http://localhost:9999");
-
-        driver.findElement(By.className("input__control")).sendKeys("Vladimir");
-        driver.findElement(By.className("checkbox__box")).click();
-        driver.findElement(By.className("button")).click();
-        String text = driver.findElement(By.className("input__sub")).getText();
+        String text = driver.findElement(By.cssSelector("[data-test-id= name].input_invalid .input__sub")).getText();
 
         assertEquals("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.", text.trim());
 
     }
 
     @Test
-    public void Test_3() { ///поле имени пустое
+    public void nameFieldIsEmpty() { ///поле имени пустое
 
         driver.get("http://localhost:9999");
 
-        driver.findElement(By.name("phone")).sendKeys("+79030000001");
+        driver.findElement(By.cssSelector("[data-test-id = 'phone'] input")).sendKeys("+00000000000");
         driver.findElement(By.className("checkbox__box")).click();
         driver.findElement(By.className("button")).click();
-        String text = driver.findElement(By.className("input__sub")).getText();
+        String text = driver.findElement(By.cssSelector("[data-test-id= name].input_invalid .input__sub")).getText();
 
         assertEquals("Поле обязательно для заполнения", text.trim());
 
     }
 
     @Test
-    public void Test_4() { ///ввод  НЕ допустимого № телефона
+    public void enterNotValidPhone() { ///ввод  НЕ допустимого № телефона
 
         driver.get("http://localhost:9999");
 
-        driver.findElement(By.className("input__control")).sendKeys("Владимир");
+        driver.findElement(By.cssSelector("[data-test-id = 'name'] input")).sendKeys("Владимир");
         driver.findElement(By.cssSelector("[data-test-id = phone] input")).sendKeys("-7903");
         driver.findElement(By.className("checkbox__box")).click();
         driver.findElement(By.className("button")).click();
@@ -98,11 +85,11 @@ public class WebInterfaceValidateTest {
     }
 
     @Test
-    public void Test_5() { ///поле № телефона пустое
+    public void phoneFieldIsEmpty() { ///поле № телефона пустое
 
         driver.get("http://localhost:9999");
 
-        driver.findElement(By.className("input__control")).sendKeys("Владимир");
+        driver.findElement(By.cssSelector("[data-test-id = 'name'] input")).sendKeys("Владимир");
         //driver.findElement(By.cssSelector("[data-test-id= phone] input")).sendKeys("+79011114038");
         driver.findElement(By.className("checkbox__box")).click();
         driver.findElement(By.className("button")).click();
@@ -114,7 +101,7 @@ public class WebInterfaceValidateTest {
     }
 
     @Test
-    public void Test_6() { ///тест на нажатие check-box
+    public void checkboxTest() { ///тест на нажатие check-box
 
         driver.get("http://localhost:9999");
 
@@ -123,14 +110,8 @@ public class WebInterfaceValidateTest {
         //driver.findElement(By.className("checkbox__box")).click();
         driver.findElement(By.className("button")).click();
 
-        //Check-box не нажат (галочка отсутствует)//
-        //element - наш объект (check-box), обращаемся по атрибуту data-test-id= agreement
-        WebElement element = driver.findElement(By.cssSelector("[data-test-id= agreement] input"));
-        // проверяем у нашего element наличие класса. Если класс "checkbox_checked" есть - галка поставлена
-        //если класса "checkbox_checked" нет - галка НЕ поставлена
-        //getAttribute - проверка отсутствия проверяемого класса
-        String classValue = element.getAttribute("checkbox_checked");
-        assertNull(null, classValue);
+        boolean text = driver.findElement(By.cssSelector("[data-test-id = agreement].input_invalid")).isDisplayed();
+        assertTrue(text);
 
     }
 }
