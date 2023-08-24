@@ -47,7 +47,7 @@ public class WebInterfaceValidateTest {
 
         driver.findElement(By.cssSelector("[data-test-id = 'name'] input")).sendKeys("Vladimir");
         driver.findElement(By.cssSelector("[data-test-id = 'phone'] input")).sendKeys("+79011114038");
-        driver.findElement(By.className("checkbox__box")).click();
+        driver.findElement(By.cssSelector("[data-test-id= 'agreement'].checkbox")).click();
         driver.findElement(By.className("button")).click();
         String text = driver.findElement(By.cssSelector("[data-test-id= name].input_invalid .input__sub")).getText();
 
@@ -61,7 +61,7 @@ public class WebInterfaceValidateTest {
         driver.get("http://localhost:9999");
 
         driver.findElement(By.cssSelector("[data-test-id = 'phone'] input")).sendKeys("+00000000000");
-        driver.findElement(By.className("checkbox__box")).click();
+        driver.findElement(By.cssSelector("[data-test-id= 'agreement'].checkbox")).click();
         driver.findElement(By.className("button")).click();
         String text = driver.findElement(By.cssSelector("[data-test-id= name].input_invalid .input__sub")).getText();
 
@@ -76,7 +76,7 @@ public class WebInterfaceValidateTest {
 
         driver.findElement(By.cssSelector("[data-test-id = 'name'] input")).sendKeys("Владимир");
         driver.findElement(By.cssSelector("[data-test-id = phone] input")).sendKeys("-7903");
-        driver.findElement(By.className("checkbox__box")).click();
+        driver.findElement(By.cssSelector("[data-test-id= 'agreement'].checkbox")).click();
         driver.findElement(By.className("button")).click();
         List<WebElement> elements = driver.findElements(By.className("input__sub"));
         String text = elements.get(1).getText();
@@ -91,7 +91,7 @@ public class WebInterfaceValidateTest {
 
         driver.findElement(By.cssSelector("[data-test-id = 'name'] input")).sendKeys("Владимир");
         //driver.findElement(By.cssSelector("[data-test-id= phone] input")).sendKeys("+79011114038");
-        driver.findElement(By.className("checkbox__box")).click();
+        driver.findElement(By.cssSelector("[data-test-id= 'agreement'].checkbox")).click();
         driver.findElement(By.className("button")).click();
 
         String text = driver.findElement(By.cssSelector("[data-test-id= phone].input_invalid .input__sub")).getText();
@@ -105,13 +105,13 @@ public class WebInterfaceValidateTest {
 
         driver.get("http://localhost:9999");
 
-        driver.findElement(By.className("input__control")).sendKeys("Владимир");
+        driver.findElement(By.cssSelector("[data-test-id = 'name'] input")).sendKeys("Владимир");
         driver.findElement(By.cssSelector("[data-test-id = phone] input")).sendKeys("+79011114038");
-        //driver.findElement(By.className("checkbox__box")).click();
+        //driver.findElement(By.cssSelector("[data-test-id= 'agreement'].checkbox")).click();
         driver.findElement(By.className("button")).click();
 
         boolean text = driver.findElement(By.cssSelector("[data-test-id = agreement].input_invalid")).isDisplayed();
-        assertTrue(text);
+        assertEquals(true, text);
 
     }
 }

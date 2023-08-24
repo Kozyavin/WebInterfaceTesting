@@ -46,10 +46,9 @@ public class WebInterfaceTesting {
         driver.get("http://localhost:9999");
 
         //Выполняемые действия
-        List<WebElement> elements = driver.findElements(By.className("input__control"));
-        elements.get(0).sendKeys("Владимир");
-        elements.get(1).sendKeys("+79030000001");
-        driver.findElement(By.className("checkbox__box")).click();
+        driver.findElement(By.cssSelector("[data-test-id = 'name'] input")).sendKeys("Владимир Иванов-Петров");
+        driver.findElement(By.cssSelector("[data-test-id = 'phone'] input")).sendKeys("+79011114038");
+        driver.findElement(By.cssSelector("[data-test-id= 'agreement'].checkbox")).click();
         driver.findElement(By.className("button")).click();
         String text = driver.findElement(By.cssSelector("[data-test-id= 'order-success']")).getText();
 
